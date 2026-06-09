@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Pesquisa Lago - Sistema de Consulta BETA</title>
+    <style>
+        /* ========================================
+           VARIÁVEIS CSS - TEMA CLARO E ESCURO
+        ======================================== */
+        :root {
+            --primary: #1E2761;
+            --primary-light: #2E75B6;
+            --accent: #eb1111;
+            --bg-primary: #F8F9FC;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F4F7FF;
+            --text-primary: #1A202C;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0F0F13;
+            --bg-secondary: #1A1A24;
+            --bg-tertiary: #252530;
+            --text-primary: #F0F0F5;
+            --text-secondary: #B8B8CC;
+            --text-muted: #8888AA;
+            --border-color: #2A2A3A;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .version {
+            font-size: 12px;
+            background: var(--primary);
+            color: rgb(226, 204, 9);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .btn-theme {
+            padding: 10px 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .btn-theme:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* DASHBOARD */
+        .dashboard {
+            margin: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+        }
+
+        .stat-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* SEARCH SECTION */
+        .search-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .search-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-header h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .search-subtitle {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 48px 16px 56px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30, 39, 97, 0.1);
+        }
+
+        .btn-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: var(--text-muted);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .btn-clear.visible {
+            display: flex;
+        }
+
+        .btn-clear:hover {
+            background: var(--accent);
+        }
+
+        .btn-search {
+            padding: 16px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .btn-search:hover {
+            background: #FF7B81;
+            transform: translateY(-2px);
+        }
+
+        /* QUICK FILTERS */
+        .quick-filters {
+            margin-top: 20px;
+        }
+
+        .quick-filters h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-chip:hover,
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* RESULTS SECTION */
+        .results-section {
+            display: none;
+            margin-bottom: 40px;
+        }
+
+        .results-section.visible {
+            display: block;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-header h2 {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* TABLE */
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results-table thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        .results-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .results-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .results-table tbody tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .results-table td {
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .btn-view-details {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .btn-view-details:hover {
+            background: var(--primary-light);
+        }
+
+        /* NO RESULTS */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .no-results.visible {
+            display: block;
+        }
+
+        .no-results-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* MODAL */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .btn-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .btn-close:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-item strong {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .detail-item p {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .btn-search {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .results-table {
+                min-width: 600px;
+            }
+        }
+
+        /* LOADER */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader p {
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .highlight {
+            background-color: yellow;
+            color: black;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <div class="loader-spinner"></div>
+        <p>Carregando sistema...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+               <div class="logo">
+    <img src="logo.png" alt="Lago Imóveis" class="logo-img">
+    <h1>
+        Central de Pesquisa Lago
+        <span class="version">BETA</span>
+    </h1>
+</div>
+                <button class="btn-theme" id="btnTheme">🌓 Alternar Tema</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Dashboard Stats -->
+            <section class="dashboard" id="dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <h3 id="statTotal">0</h3>
+                            <p>Total de Registros</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏢</div>
+                        <div class="stat-content">
+                            <h3 id="statDepartments">0</h3>
+                            <p>Departamentos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3 id="statResponsible">0</h3>
+                            <p>Responsáveis</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔍</div>
+                        <div class="stat-content">
+                            <h3 id="statSearches">0</h3>
+                            <p>Pesquisas Realizadas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-header">
+                    <h2>🔎 Buscar Informações</h2>
+                    <p class="search-subtitle">Digite palavras-chave para encontrar departamentos e responsáveis</p>
+                </div>
+
+                <div class="search-bar">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="Ex.: IPTU, boleto, vistoria, aluguel, contrato..."
+                            autocomplete="off"
+                        >
+                        <button class="btn-clear" id="btnClearSearch">✕</button>
+                    </div>
+                    <button class="btn-search" id="btnSearch">Pesquisar</button>
+                </div>
+
+                <!-- Quick Filters -->
+                <div class="quick-filters">
+                    <h4>🏷️ Filtros Rápidos</h4>
+                    <div class="filter-chips" id="filterChips"></div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <h2>📋 Resultados da Pesquisa</h2>
+                    <span class="results-count" id="resultsCount">0 resultados</span>
+                </div>
+
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Assunto</th>
+                                <th>Departamento</th>
+                                <th>Responsável</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- No Results -->
+            <div class="no-results" id="noResults">
+                <div class="no-results-icon">🔍</div>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente usar palavras-chave diferentes ou verifique a ortografia</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Detalhes -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Detalhes do Registro</h2>
+                <button class="btn-close" id="btnCloseModal">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Lago Imobiliária - Central de Pesquisa Beta</p>
+            <p>Desenvolvido com ❤️ por Lago TI</p>
+        </div>
+    </footer>
+
+    <script>
+        // ========================================
+        // BASE DE DADOS - 44 REGISTROS REAIS
+        // ========================================
+        const DATABASE = [
+            {
+                id: 1,
+                palavra: "Primeiro Boleto",
+                departamento: "Contratos e Análise",
+                responsavel: "Equipe Contratos",
+                sinonimos: "boleto; primeiro boleto; boleto inicial; boleto contrato; boleto de entrada; primeiro aluguel"
+            },
+            {
+                id: 2,
+                palavra: "Segunda Via de Boleto",
+                departamento: "Aplicativo / Site / Chatbot",
+                responsavel: "Autoatendimento",
+                sinonimos: "boleto; segunda via; 2 via; 2ª via; segunda via de boleto; boleto vencido; boleto atualizado; emitir boleto; cliente pediu boleto"
+            },
+            {
+                id: 3,
+                palavra: "Informe de Rendimento",
+                departamento: "Jurídico",
+                responsavel: "Sophia",
+                sinonimos: "informe de rendimento; informe rendimentos; informe de rendimentos; imposto de renda; IR; declaração de rendimentos; informe IR"
+            },
+            {
+                id: 4,
+                palavra: "Informe de Rendimento",
+                departamento: "Site / Aplicativo Lago",
+                responsavel: "Autoatendimento",
+                sinonimos: "informe de rendimento; informe rendimentos; informe de rendimentos; imposto de renda; IR; declaração de rendimentos; informe IR; site; aplicativo"
+            },
+            {
+                id: 5,
+                palavra: "DIMOB",
+                departamento: "Jurídico",
+                responsavel: "Sophia",
+                sinonimos: "dimob; declaração imobiliária; declaração imobiliaria; imposto de renda; receita federal; dirf; darf"
+            },
+            {
+                id: 6,
+                palavra: "IPTU",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "iptu; imposto; imposto predial; imposto territorial; carnê iptu; carne iptu; carnê de iptu; carne de iptu; segunda via iptu; parcela iptu; débito iptu; debito iptu; iptu em atraso; iptu vencido; comprovante iptu; pagamento iptu; quitação iptu; quitacao iptu; valor iptu; taxa municipal; imposto do imóvel; imposto do imovel; imposto da casa; valor do imposto"
+            },
+            {
+                id: 7,
+                palavra: "Débitos de Condomínio",
+                departamento: "Débitos",
+                responsavel: "Camila e Gabriela",
+                sinonimos: "condomínio; condominio; débitos de condomínio; debitos de condominio; boleto condomínio; boleto condominio; taxa condomínio; taxa condominio; inadimplência condomínio; administradora condomínio"
+            },
+            {
+                id: 8,
+                palavra: "Fundo de Reserva",
+                departamento: "Débitos",
+                responsavel: "Camila e Gabriela",
+                sinonimos: "condomínio; condominio; fundo de reserva; reembolso fundo de reserva; taxa fundo de reserva; reserva condomínio; reserva condominio"
+            },
+            {
+                id: 9,
+                palavra: "Condomínio Rateios",
+                departamento: "Débitos",
+                responsavel: "Camila e Gabriela",
+                sinonimos: "condomínio; condominio; condomínio rateios; condominio rateios; rateio condomínio; rateio condominio; rateio condominial; rateio de condomínio; rateio de condominio; rateio locatário; rateio locador"
+            },
+            {
+                id: 10,
+                palavra: "Condomínio Rescisão",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "condomínio; condominio; condomínio rescisão; condominio rescisao; débito condomínio rescisão; debito condominio rescisao; acerto condomínio; condomínio final; rescisão condomínio"
+            },
+            {
+                id: 11,
+                palavra: "Aluguel em Atraso",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "aluguel; aluguel em atraso; aluguel atrasado; débito aluguel; debito aluguel; inadimplência; inadimplencia; cobrança aluguel; aluguel vencido; pagamento em atraso"
+            },
+            {
+                id: 12,
+                palavra: "Aluguel em Renegociação",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "aluguel; aluguel em renegociação; aluguel em renegociacao; renegociação; renegociacao; renegociar aluguel; parcelamento aluguel; acordo aluguel; negociação débito; negociacao debito"
+            },
+            {
+                id: 13,
+                palavra: "Data de Repasse",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "repasse; data de repasse; quando vou receber; quando cai o aluguel; crédito do aluguel; credito do aluguel; pagamento locador; crédito locador; credito locador; data de crédito; data de credito"
+            },
+            {
+                id: 14,
+                palavra: "Repasse de Aluguel",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "repasse; repasse de aluguel; aluguel repasse; pagamento do aluguel; repasse ao proprietário; repasse ao proprietario; recebimento aluguel; valor será creditado; valor sera creditado; quando vai creditar"
+            },
+            {
+                id: 15,
+                palavra: "Solicitar Via de Contrato de Locação",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "documentos; via do contrato; segunda via do contrato; contrato de locação; contrato locacao; cópia do contrato; copia do contrato; solicitar contrato; envio de contrato; documento de locação; contrato aluguel"
+            },
+            {
+                id: 16,
+                palavra: "Solicitar Extrato",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "documentos; extrato; solicitar extrato; extrato financeiro; extrato do imóvel; extrato do imovel; extrato do proprietário; extrato do proprietario; extrato locador; histórico financeiro; movimentação financeira"
+            },
+            {
+                id: 17,
+                palavra: "Solicitar Demonstrativo",
+                departamento: "Débitos",
+                responsavel: "Setor de Débitos",
+                sinonimos: "documentos; demonstrativo; demonstrativo financeiro; demonstrativo de repasse; demonstrativo proprietário; demonstrativo proprietario; demonstrativo locador; relatório financeiro; relatorio financeiro; relatório de recebimentos"
+            },
+            {
+                id: 18,
+                palavra: "Reajuste de Aluguel",
+                departamento: "Renovação",
+                responsavel: "Setor de Renovação",
+                sinonimos: "aluguel; reajuste; reajuste de aluguel; reajuste aluguel; aumento aluguel; igpm; igp-m; ipca; índice reajuste; indice reajuste; correção aluguel; correcao aluguel"
+            },
+            {
+                id: 19,
+                palavra: "Renovação",
+                departamento: "Renovação",
+                responsavel: "Setor de Renovação",
+                sinonimos: "renovação; renovacao; renovar contrato; renovação contratual; renovacao contratual; renovação de aluguel; renovacao de aluguel; prorrogação contrato; prorrogacao contrato; continuidade contrato"
+            },
+            {
+                id: 20,
+                palavra: "Alterar Data de Vencimento do Aluguel",
+                departamento: "Renovação",
+                responsavel: "Setor de Renovação",
+                sinonimos: "aluguel; vencimento; alterar data de vencimento; alterar data d vencimento aluguel; mudar vencimento aluguel; trocar vencimento aluguel; alterar vencimento contrato; data de pagamento aluguel; alterar dia de pagamento; mudar data de pagamento; alteração de vencimento; troca da data de vencimento; alterar dia do aluguel"
+            },
+            {
+                id: 21,
+                palavra: "Alterar Dados Bancários",
+                departamento: "Financeiro",
+                responsavel: "Setor Financeiro",
+                sinonimos: "alterar dados bancários; alterar dados bancarios; trocar conta bancária; trocar conta bancaria; mudar conta bancária; alterar conta para repasse; alterar pix; alterar banco; alterar agência; alterar agencia; alterar conta corrente; dados para repasse"
+            },
+            {
+                id: 22,
+                palavra: "Alteração de Beneficiário",
+                departamento: "Trocas",
+                responsavel: "Setor de Trocas",
+                sinonimos: "alteração de beneficiário; alteracao de beneficiario; alterar beneficiário; alterar beneficiario; troca de beneficiário; troca de beneficiario; mudança de beneficiário; beneficiário do imóvel; beneficiario do imovel; alteração do favorecido; troca de proprietário; alteração de locador; novo beneficiário"
+            },
+            {
+                id: 23,
+                palavra: "Troca de Contrato",
+                departamento: "Trocas",
+                responsavel: "Setor de Trocas",
+                sinonimos: "troca; troca de contrato; alteração contratual; alteracao contratual; mudança contratual; mudar contrato; alterar contrato; transferência de contrato; transferencia de contrato; troca de locador; troca de locatário; troca de locatario; troca de fiador; troca de garantia; aditivo contratual"
+            },
+            {
+                id: 24,
+                palavra: "Multa Contratual",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "multa; multa contratual; multa rescisória; multa rescisoria; cálculo de multa; calculo de multa; multa de saída; multa de saida; rescisão antecipada; rescisao antecipada; quebra de contrato; valor da multa; multa aluguel; multa por rescisão"
+            },
+            {
+                id: 25,
+                palavra: "Entregar Imóvel",
+                departamento: "Retenção",
+                responsavel: "Francielly",
+                sinonimos: "entregar imóvel; entregar imovel; quero entregar o imóvel; quero entregar o imovel; devolver imóvel; devolver imovel; sair do imóvel; sair do imovel; desocupar imóvel; desocupar imovel; encerrar locação; encerrar locacao; encerrar aluguel; não quero mais o imóvel; nao quero mais o imovel; deixar o imóvel; deixar o imovel; entrega do imóvel; entrega de imóvel; solicitar desocupação; quero sair do imóvel"
+            },
+            {
+                id: 26,
+                palavra: "Agendar Vistoria de Saída",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "vistoria; agendar vistoria de saída; agendar vistoria de saida; agendar vistoria; marcar vistoria de saída; marcar vistoria de saida; solicitar vistoria de saída; vistoria final; agendamento de vistoria; marcar vistoria final; vistoria para entrega do imóvel; agendar entrega do imóvel; agendar laudo de saída; vistoria rescisão"
+            },
+            {
+                id: 27,
+                palavra: "Vistoria de Entrada",
+                departamento: "Contratos e Análise",
+                responsavel: "Alan Brito Ramos",
+                sinonimos: "vistoria; vistoria de entrada; laudo de entrada; entrada do imóvel; entrada do imovel; vistoria inicial; alan; chaves entrada"
+            },
+            {
+                id: 28,
+                palavra: "Contestação de Vistoria de Entrada",
+                departamento: "Manutenção",
+                responsavel: "Setor de Manutenção",
+                sinonimos: "vistoria; contestação de vistoria; contestacao de vistoria; contestação vistoria; contestacao vistoria; contestação de vistoria de entrada; contestacao de vistoria de entrada; divergência de vistoria; divergencia de vistoria; problema na vistoria; erro na vistoria; revisão de vistoria; revisao de vistoria; correção de vistoria; correcao de vistoria; contestar vistoria; laudo incorreto; fotos da vistoria"
+            },
+            {
+                id: 29,
+                palavra: "Vistoria de Saída",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "vistoria; vistoria de saída; vistoria de saida; laudo de saída; laudo de saida; saída do imóvel; saida do imovel; entrega de imóvel; entrega de imovel; entrega de chaves"
+            },
+            {
+                id: 30,
+                palavra: "Contestação de Vistoria de Saída",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "vistoria; contestação de vistoria de saída; contestacao de vistoria de saida; contestação vistoria saída; contestacao vistoria saida; contestação laudo de saída; divergência vistoria de saída; divergencia vistoria de saida; revisão vistoria de saída; revisao vistoria de saida; contestar vistoria de saída; problema vistoria de saída; discordância vistoria de saída; laudo de saída incorreto; contestação rescisão"
+            },
+            {
+                id: 31,
+                palavra: "Retirar Administração",
+                departamento: "Jurídico",
+                responsavel: "Carol",
+                sinonimos: "retirar administração; retirar administracao; retirada de administração; retirada de administracao; encerrar administração; cancelar administração; encerramento da administração; retirar imóvel da administração; tirar imóvel da lago; distrato de administração; contrato de administração"
+            },
+            {
+                id: 32,
+                palavra: "Notificação",
+                departamento: "Jurídico",
+                responsavel: "Setor Jurídico",
+                sinonimos: "notificação; notificacao; notificações; notificacoes; notificação extrajudicial; notificar cliente; notificar locatário; notificar locatario; notificar locador; pedido de imóvel; comunicação formal; carta de notificação; notificação jurídica"
+            },
+            {
+                id: 33,
+                palavra: "Notificações",
+                departamento: "Jurídico",
+                responsavel: "Setor Jurídico",
+                sinonimos: "notificação; notificacao; notificações; notificacoes; notificação extrajudicial; notificar cliente; notificar locatário; notificar locatario; notificar locador; pedido de imóvel; comunicação formal; carta de notificação; notificação jurídica"
+            },
+            {
+                id: 34,
+                palavra: "Reclame Aqui",
+                departamento: "Jurídico",
+                responsavel: "Heliane",
+                sinonimos: "reclame aqui; reclamação; reclamacao; reclamação pública; procon; consumidor; resposta formal; ouvidoria"
+            },
+            {
+                id: 35,
+                palavra: "Procon",
+                departamento: "Jurídico",
+                responsavel: "Heliane",
+                sinonimos: "procon; reclame aqui; consumidor; reclamação; reclamacao; defesa do consumidor; notificação procon"
+            },
+            {
+                id: 36,
+                palavra: "CPFL",
+                departamento: "Débitos",
+                responsavel: "Arthur e Maurício",
+                sinonimos: "cpfl; energia; luz; transferência de titularidade; transferencia de titularidade; titularidade cpfl; unidade consumidora; UC; religação energia; religacao energia"
+            },
+            {
+                id: 37,
+                palavra: "SAERP",
+                departamento: "Débitos",
+                responsavel: "Arthur e Maurício",
+                sinonimos: "saerp; água; agua; esgoto; transferência de titularidade água; transferencia de titularidade agua; rgl; conta de água; conta de agua; religação água; religacao agua"
+            },
+            {
+                id: 38,
+                palavra: "Rescisão",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "rescisão; rescisao; encerramento de contrato; desocupação; desocupacao; aviso de desocupação; aviso de desocupacao"
+            },
+            {
+                id: 39,
+                palavra: "Aviso de Desocupação",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "aviso de desocupação; aviso de desocupacao; aviso prévio; aviso previo; 30 dias; saída do imóvel; saida do imovel; entrega de imóvel; entrega de imovel"
+            },
+            {
+                id: 40,
+                palavra: "Checagem de Reparos",
+                departamento: "Rescisão",
+                responsavel: "Setor de Rescisão",
+                sinonimos: "checagem de reparos; reparos rescisão; reparos rescisao; checagem; reparação de danos; reparacao de danos; vistoria reprovada"
+            },
+            {
+                id: 41,
+                palavra: "Cadastrar Imóvel",
+                departamento: "Captação",
+                responsavel: "Setor de Captação",
+                sinonimos: "imóvel; imovel; cadastrar imóvel; cadastrar imovel; cadastro de imóvel; cadastro de imovel; incluir imóvel; incluir imovel; novo imóvel; novo imovel; captar imóvel; captar imovel; captação de imóvel; colocar imóvel na carteira; entrar imóvel; imóvel novo; cadastro proprietário; cadastro de locador; colocar imóvel para locação; disponibilizar imóvel"
+            },
+            {
+                id: 42,
+                palavra: "Reajustar Valor de Imóvel Cadastrado",
+                departamento: "Captação",
+                responsavel: "Setor de Captação",
+                sinonimos: "imóvel; imovel; valor do imóvel; valor do imovel; reajustar valor de imóvel cadastrado; reajustar valor do imóvel; alterar valor do imóvel; atualizar valor do imóvel; mudar valor do imóvel; corrigir valor do imóvel; valor de locação; alterar aluguel anunciado; atualizar aluguel do imóvel; reajuste de valor do imóvel cadastrado; alterar preço do imóvel; atualizar preço do imóvel; mudança de valor de locação"
+            },
+            {
+                id: 43,
+                palavra: "Tirar Imóvel do Sistema",
+                departamento: "Captação",
+                responsavel: "Setor de Captação",
+                sinonimos: "imóvel; imovel; tirar imóvel do sistema; tirar imovel do sistema; remover imóvel; remover imovel; excluir imóvel; excluir imovel; retirar imóvel da carteira; inativar imóvel; desativar imóvel; baixar imóvel; tirar anúncio do imóvel; retirar imóvel da locação; encerrar divulgação do imóvel; imóvel não disponível; retirar imóvel cadastrado"
+            },
+            {
+                id: 44,
+                palavra: "Taxa de adiministração",
+                departamento: "Contratos e Análise",
+                responsavel: "Equipe Contratos",
+                sinonimos: "Taxa de administração, taxa administrativa, tarifa administrativa, custo administrativo, encargo administrativo, cobrança administrativa, despesas administrativas, honorários administrativos, taxa de gestão, taxa de gerenciamento, administração contratual, custo de administração, tarifa de gestão, taxa de serviço, cobrança de serviço, valor administrativo, encargo de gestão, taxa imobiliária, comissão administrativa, taxa operacional, contrato de aluguel, contratos, setor de contratos, equipe de contratos, departamento de contratos, análise contratual, análise de contrato, suporte contratual, atendimento contratual, gestão de contratos, administração de contratos, dúvidas contratuais, informações contratuais, esclarecimentos contratuais, locação, aluguel, imobiliária, administração imobiliária, gestão imobiliária, cobrança de aluguel, financeiro de locação, faturamento de aluguel, taxas da locação, encargos da locação, custos da locação."
+            },
+            {
+                id: 45,
+                palavra: "Taxa de renovação",
+                departamento: "Renovação",
+                responsavel: "Equipe renovação",
+                sinonimos: "Taxa de renovação, tarifa de renovação, cobrança de renovação, encargo de renovação, custo de renovação, valor de renovação, taxa renovatória, taxa de prorrogação contratual, taxa de extensão contratual, taxa de continuidade contratual, renovação de contrato, renovação contratual, prorrogação de contrato, extensão de contrato, continuidade da locação, renovação de locação, renovação de aluguel, renovação imobiliária, renovação do contrato de aluguel, renovação da locação, renovação de vínculo contratual, atualização contratual, manutenção contratual, regularização contratual, ajuste contratual, revisão contratual, termo aditivo, aditivo contratual, renovação automática, renovação manual, vencimento contratual, contrato a vencer, contrato vencido, novo período contratual, período renovado, recontratação, continuidade do contrato, permanência contratual, equipe de renovação, setor de renovação, departamento de renovação, atendimento de renovação, suporte de renovação, gestão de renovação, análise de renovação", 
+            },
+            {
+                id: 46,
+                palavra: "Taxa de contrato",
+                departamento: "Contratos e Análise",
+                responsavel: "Equipe Contratos",
+                sinonimos: "Taxa de contrato, tarifa de contrato, cobrança de contrato, encargo contratual, custo contratual, valor do contrato, taxa contratual, taxa de formalização contratual, taxa de elaboração de contrato, taxa de emissão de contrato, taxa de confecção de contrato, taxa de assinatura de contrato, taxa de abertura de contrato, taxa de cadastro contratual, taxa de análise contratual, taxa de processamento contratual, taxa de documentação contratual, custo de formalização, custo de elaboração contratual, custo de emissão contratual, cobrança contratual, despesas contratuais, honorários contratuais, formalização de contrato, elaboração de contrato, emissão de contrato, confecção de contrato, assinatura de contrato, cadastro de contrato, abertura de contrato, análise de contrato, análise contratual, documentação contratual, documentação de locação, contrato de locação, contrato de aluguel, contrato imobiliário, contrato residencial, contrato comercial, contrato novo, novo contrato, celebração de contrato, criação de contrato, geração de contrato, processamento de contrato, gestão de contratos, administração de contratos, suporte contratual, atendimento contratual, dúvidas contratuais, informações contratuais, esclarecimentos contratuais, equipe de contratos, setor de contratos, departamento de contratos, contratos e análise, departamento de contratos e análise, locação, aluguel, imobiliária, administração imobiliária, gestão imobiliária, documentação da locação, documentação do aluguel, custos da contratação, encargos contratuais, despesas de contratação, taxa de contratação, custo de contratação, cobrança de contratação, taxa de intermediação contratual, taxa de serviços contratuais, regularização contratual, validação contratual, conferência contratual, aprovação contratual.",
+            }
+
+        ];
+
+        // ========================================
+        // VARIÁVEIS GLOBAIS
+        // ========================================
+        let currentResults = [];
+        let searchCount = 0;
+
+        // ========================================
+        // FUNÇÃO DE NORMALIZAÇÃO DE TEXTO
+        // ========================================
+        function normalizeText(text) {
+            return text
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .trim();
+        }
+
+        // ========================================
+        // FUNÇÃO DE BUSCA
+        // ========================================
+        function performSearch(query) {
+            if (!query || query.trim() === '') {
+                return [];
+            }
+
+            const normalizedQuery = normalizeText(query);
+            const results = [];
+
+            DATABASE.forEach(record => {
+                const normalizedPalavra = normalizeText(record.palavra);
+                const normalizedSinonimos = normalizeText(record.sinonimos);
+                const normalizedDepartamento = normalizeText(record.departamento);
+                const normalizedResponsavel = normalizeText(record.responsavel);
+
+                // Busca na palavra, sinônimos, departamento e responsável
+                if (
+                    normalizedPalavra.includes(normalizedQuery) ||
+                    normalizedSinonimos.includes(normalizedQuery) ||
+                    normalizedDepartamento.includes(normalizedQuery) ||
+                    normalizedResponsavel.includes(normalizedQuery)
+                ) {
+                    results.push(record);
+                }
+            });
+
+            return results;
+        }
+
+        // ========================================
+        // EXIBIR RESULTADOS
+        // ========================================
+        function displayResults(results, query = '') {
+            const resultsSection = document.getElementById('resultsSection');
+            const noResults = document.getElementById('noResults');
+            const resultsTableBody = document.getElementById('resultsTableBody');
+            const resultsCount = document.getElementById('resultsCount');
+
+            // Limpar tabela
+            resultsTableBody.innerHTML = '';
+
+            if (results.length === 0) {
+                resultsSection.classList.remove('visible');
+                noResults.classList.add('visible');
+                return;
+            }
+
+            noResults.classList.remove('visible');
+            resultsSection.classList.add('visible');
+            resultsCount.textContent = `${results.length} resultado${results.length > 1 ? 's' : ''}`;
+
+            // Função para destacar termo de busca
+            function highlightText(text, query) {
+                if (!query) return text;
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            results.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${highlightText(record.palavra, query)}</td>
+                    <td>${highlightText(record.departamento, query)}</td>
+                    <td>${highlightText(record.responsavel, query)}</td>
+                    <td>
+                        <button class="btn-view-details" onclick="showDetails(${record.id})">
+                            Ver Detalhes
+                        </button>
+                    </td>
+                `;
+                resultsTableBody.appendChild(row);
+            });
+
+            // Incrementar contador de pesquisas
+            searchCount++;
+            document.getElementById('statSearches').textContent = searchCount;
+        }
+
+        // ========================================
+        // MOSTRAR DETALHES NO MODAL
+        // ========================================
+        function showDetails(id) {
+            const record = DATABASE.find(r => r.id === id);
+            if (!record) return;
+
+            const modal = document.getElementById('detailsModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="detail-item">
+                    <strong>Palavra Encontrada</strong>
+                    <p>${record.palavra}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Departamento</strong>
+                    <p>${record.departamento}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Responsável</strong>
+                    <p>${record.responsavel}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Termos de Busca / Sinônimos</strong>
+                    <p>${record.sinonimos}</p>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // ========================================
+        // FECHAR MODAL
+        // ========================================
+        function closeModal() {
+            document.getElementById('detailsModal').classList.remove('active');
+        }
+
+        // ========================================
+        // GERAR FILTROS RÁPIDOS
+        // ========================================
+        function generateQuickFilters() {
+            const departments = [...new Set(DATABASE.map(r => r.departamento))];
+            const filterChips = document.getElementById('filterChips');
+
+            departments.forEach(dept => {
+                const chip = document.createElement('div');
+                chip.className = 'filter-chip';
+                chip.textContent = dept;
+                chip.onclick = () => {
+                    document.getElementById('searchInput').value = dept;
+                    handleSearch();
+                };
+                filterChips.appendChild(chip);
+            });
+        }
+
+        // ========================================
+        // ATUALIZAR ESTATÍSTICAS
+        // ========================================
+        function updateStats() {
+            const departments = [...new Set(DATABASE.map(r => r.departamento))];
+            const responsibles = [...new Set(DATABASE.map(r => r.responsavel))];
+
+            document.getElementById('statTotal').textContent = DATABASE.length;
+            document.getElementById('statDepartments').textContent = departments.length;
+            document.getElementById('statResponsible').textContent = responsibles.length;
+        }
+
+        // ========================================
+        // HANDLER DE BUSCA
+        // ========================================
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                alert('Por favor, digite algo para pesquisar');
+                return;
+            }
+
+            const results = performSearch(query);
+            currentResults = results;
+            displayResults(results, query);
+
+            // Mostrar botão de limpar
+            document.getElementById('btnClearSearch').classList.add('visible');
+        }
+
+        // ========================================
+        // LIMPAR BUSCA
+        // ========================================
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('btnClearSearch').classList.remove('visible');
+            document.getElementById('resultsSection').classList.remove('visible');
+            document.getElementById('noResults').classList.remove('visible');
+        }
+
+        // ========================================
+        // ALTERNAR TEMA
+        // ========================================
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // ========================================
+        // INICIALIZAÇÃO
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carregar tema salvo
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+
+            // Atualizar estatísticas
+            updateStats();
+
+            // Gerar filtros rápidos
+            generateQuickFilters();
+
+            // Event Listeners
+            document.getElementById('btnSearch').addEventListener('click', handleSearch);
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSearch();
+            });
+            document.getElementById('btnClearSearch').addEventListener('click', clearSearch);
+            document.getElementById('btnTheme').addEventListener('click', toggleTheme);
+            document.getElementById('btnCloseModal').addEventListener('click', closeModal);
+            document.getElementById('modalOverlay').addEventListener('click', closeModal);
+
+            // Esconder loader
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
