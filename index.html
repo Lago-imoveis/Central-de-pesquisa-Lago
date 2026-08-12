@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Pesquisa Lago - Sistema de Consulta BETA</title>
+    <title>Central de Pesquisa Lago - Sistema de Consulta V1</title>
      <link rel="icon" type="image/png" href="favicon.png">
     <style>
         /* ========================================
@@ -386,6 +386,24 @@
             background: var(--primary-light);
         }
 
+        .actions-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge-ramal {
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            color: var(--primary-light);
+            border: 1px solid var(--primary-light);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
         /* NO RESULTS */
         .no-results {
             display: none;
@@ -638,7 +656,7 @@
     <img src="logo.png" alt="Lago Imóveis" class="logo-img">
     <h1>
         Central de Pesquisa Lago
-        <span class="version">BETA</span>
+        <span class="version">V1</span>
     </h1>
 </div>
                 <button class="btn-theme" id="btnTheme">🌓 Alternar Tema</button>
@@ -758,7 +776,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Lago Imobiliária - Central de Pesquisa Beta</p>
+            <p>&copy; 2026 Lago Imobiliária - Central de Pesquisa V1</p>
             <p>Desenvolvido com ❤️ por Lago TI</p>
         </div>
     </footer>
@@ -773,385 +791,504 @@
                 palavra: "Primeiro Boleto",
                 departamento: "Contratos e Análise",
                 responsavel: "Equipe Contratos",
-                sinonimos: "boleto; primeiro boleto; boleto inicial; boleto contrato; boleto de entrada; primeiro aluguel"
+                sinonimos: "boleto; primeiro boleto; boleto inicial; boleto contrato; boleto de entrada; primeiro aluguel",
+                ramal: "8318 e 8356"
             },
             {
                 id: 2,
                 palavra: "Segunda Via de Boleto",
                 departamento: "Aplicativo / Site / Chatbot",
                 responsavel: "Autoatendimento",
-                sinonimos: "boleto; segunda via; 2 via; 2ª via; segunda via de boleto; boleto vencido; boleto atualizado; emitir boleto; cliente pediu boleto"
+                sinonimos: "boleto; segunda via; 2 via; 2ª via; segunda via de boleto; boleto vencido; boleto atualizado; emitir boleto; cliente pediu boleto",
+                ramal: ""
             },
             {
                 id: 3,
                 palavra: "Informe de Rendimento",
                 departamento: "Jurídico",
                 responsavel: "Sophia",
-                sinonimos: "informe de rendimento; informe rendimentos; informe de rendimentos; imposto de renda; IR; declaração de rendimentos; informe IR"
+                sinonimos: "informe de rendimento; informe rendimentos; informe de rendimentos; imposto de renda; IR; declaração de rendimentos; informe IR",
+                ramal: "8339"
             },
             {
                 id: 4,
                 palavra: "Informe de Rendimento",
                 departamento: "Site / Aplicativo Lago",
                 responsavel: "Autoatendimento",
-                sinonimos: "informe de rendimento; informe rendimentos; informe de rendimentos; imposto de renda; IR; declaração de rendimentos; informe IR; site; aplicativo"
+                sinonimos: "informe de rendimento; informe rendimentos; informe de rendimentos; imposto de renda; IR; declaração de rendimentos; informe IR; site; aplicativo",
+                ramal: ""
             },
             {
                 id: 5,
                 palavra: "DIMOB",
                 departamento: "Jurídico",
                 responsavel: "Sophia",
-                sinonimos: "dimob; declaração imobiliária; declaração imobiliaria; imposto de renda; receita federal; dirf; darf"
+                sinonimos: "dimob; declaração imobiliária; declaração imobiliaria; imposto de renda; receita federal; dirf; darf",
+                ramal: "8339"
             },
             {
                 id: 6,
                 palavra: "IPTU",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "iptu; imposto; imposto predial; imposto territorial; carnê iptu; carne iptu; carnê de iptu; carne de iptu; segunda via iptu; parcela iptu; débito iptu; debito iptu; iptu em atraso; iptu vencido; comprovante iptu; pagamento iptu; quitação iptu; quitacao iptu; valor iptu; taxa municipal; imposto do imóvel; imposto do imovel; imposto da casa; valor do imposto"
+                sinonimos: "iptu; imposto; imposto predial; imposto territorial; carnê iptu; carne iptu; carnê de iptu; carne de iptu; segunda via iptu; parcela iptu; débito iptu; debito iptu; iptu em atraso; iptu vencido; comprovante iptu; pagamento iptu; quitação iptu; quitacao iptu; valor iptu; taxa municipal; imposto do imóvel; imposto do imovel; imposto da casa; valor do imposto",
+                ramal: "8347 e 8368"
             },
             {
                 id: 7,
                 palavra: "Débitos de Condomínio",
                 departamento: "Débitos",
                 responsavel: "Camila e Gabriela",
-                sinonimos: "condomínio; condominio; débitos de condomínio; debitos de condominio; boleto condomínio; boleto condominio; taxa condomínio; taxa condominio; inadimplência condomínio; administradora condomínio"
+                sinonimos: "condomínio; condominio; débitos de condomínio; debitos de condominio; boleto condomínio; boleto condominio; taxa condomínio; taxa condominio; inadimplência condomínio; administradora condomínio",
+                ramal: "8335 e 8336"
             },
             {
                 id: 8,
                 palavra: "Fundo de Reserva",
                 departamento: "Débitos",
                 responsavel: "Camila e Gabriela",
-                sinonimos: "condomínio; condominio; fundo de reserva; reembolso fundo de reserva; taxa fundo de reserva; reserva condomínio; reserva condominio"
+                sinonimos: "condomínio; condominio; fundo de reserva; reembolso fundo de reserva; taxa fundo de reserva; reserva condomínio; reserva condominio",
+                ramal: "8335 e 8336"
             },
             {
                 id: 9,
                 palavra: "Condomínio Rateios",
                 departamento: "Débitos",
                 responsavel: "Camila e Gabriela",
-                sinonimos: "condomínio; condominio; condomínio rateios; condominio rateios; rateio condomínio; rateio condominio; rateio condominial; rateio de condomínio; rateio de condominio; rateio locatário; rateio locador"
+                sinonimos: "condomínio; condominio; condomínio rateios; condominio rateios; rateio condomínio; rateio condominio; rateio condominial; rateio de condomínio; rateio de condominio; rateio locatário; rateio locador",
+                ramal: "8335 e 8336"
             },
             {
                 id: 10,
                 palavra: "Condomínio Rescisão",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "condomínio; condominio; condomínio rescisão; condominio rescisao; débito condomínio rescisão; debito condominio rescisao; acerto condomínio; condomínio final; rescisão condomínio"
+                sinonimos: "condomínio; condominio; condomínio rescisão; condominio rescisao; débito condomínio rescisão; debito condominio rescisao; acerto condomínio; condomínio final; rescisão condomínio",
+                ramal: "8346 e 8360"
             },
             {
                 id: 11,
                 palavra: "Aluguel em Atraso",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "aluguel; aluguel em atraso; aluguel atrasado; débito aluguel; debito aluguel; inadimplência; inadimplencia; cobrança aluguel; aluguel vencido; pagamento em atraso"
+                sinonimos: "aluguel; aluguel em atraso; aluguel atrasado; débito aluguel; debito aluguel; inadimplência; inadimplencia; cobrança aluguel; aluguel vencido; pagamento em atraso",
+                ramal: "8347 e 8368"
             },
             {
                 id: 12,
                 palavra: "Aluguel em Renegociação",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "aluguel; aluguel em renegociação; aluguel em renegociacao; renegociação; renegociacao; renegociar aluguel; parcelamento aluguel; acordo aluguel; negociação débito; negociacao debito"
+                sinonimos: "aluguel; aluguel em renegociação; aluguel em renegociacao; renegociação; renegociacao; renegociar aluguel; parcelamento aluguel; acordo aluguel; negociação débito; negociacao debito",
+                ramal: "8347 e 8368"
             },
             {
                 id: 13,
                 palavra: "Data de Repasse",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "repasse; data de repasse; quando vou receber; quando cai o aluguel; crédito do aluguel; credito do aluguel; pagamento locador; crédito locador; credito locador; data de crédito; data de credito"
+                sinonimos: "repasse; data de repasse; quando vou receber; quando cai o aluguel; crédito do aluguel; credito do aluguel; pagamento locador; crédito locador; credito locador; data de crédito; data de credito",
+                ramal: "8347 e 8368"
             },
             {
                 id: 14,
                 palavra: "Repasse de Aluguel",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "repasse; repasse de aluguel; aluguel repasse; pagamento do aluguel; repasse ao proprietário; repasse ao proprietario; recebimento aluguel; valor será creditado; valor sera creditado; quando vai creditar"
+                sinonimos: "repasse; repasse de aluguel; aluguel repasse; pagamento do aluguel; repasse ao proprietário; repasse ao proprietario; recebimento aluguel; valor será creditado; valor sera creditado; quando vai creditar",
+                ramal: "8347 e 8368"
             },
             {
                 id: 15,
                 palavra: "Solicitar Via de Contrato de Locação",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "documentos; via do contrato; segunda via do contrato; contrato de locação; contrato locacao; cópia do contrato; copia do contrato; solicitar contrato; envio de contrato; documento de locação; contrato aluguel"
+                sinonimos: "documentos; via do contrato; segunda via do contrato; contrato de locação; contrato locacao; cópia do contrato; copia do contrato; solicitar contrato; envio de contrato; documento de locação; contrato aluguel",
+                ramal: "8347 e 8368"
             },
             {
                 id: 16,
                 palavra: "Solicitar Extrato",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "documentos; extrato; solicitar extrato; extrato financeiro; extrato do imóvel; extrato do imovel; extrato do proprietário; extrato do proprietario; extrato locador; histórico financeiro; movimentação financeira"
+                sinonimos: "documentos; extrato; solicitar extrato; extrato financeiro; extrato do imóvel; extrato do imovel; extrato do proprietário; extrato do proprietario; extrato locador; histórico financeiro; movimentação financeira",
+                ramal: "8347 e 8368"
             },
             {
                 id: 17,
                 palavra: "Solicitar Demonstrativo",
                 departamento: "Débitos",
                 responsavel: "Setor de Débitos",
-                sinonimos: "documentos; demonstrativo; demonstrativo financeiro; demonstrativo de repasse; demonstrativo proprietário; demonstrativo proprietario; demonstrativo locador; relatório financeiro; relatorio financeiro; relatório de recebimentos"
+                sinonimos: "documentos; demonstrativo; demonstrativo financeiro; demonstrativo de repasse; demonstrativo proprietário; demonstrativo proprietario; demonstrativo locador; relatório financeiro; relatorio financeiro; relatório de recebimentos",
+                ramal: "8347 e 8368"
             },
             {
                 id: 18,
                 palavra: "Reajuste de Aluguel",
                 departamento: "Renovação",
                 responsavel: "Setor de Renovação",
-                sinonimos: "aluguel; reajuste; reajuste de aluguel; reajuste aluguel; aumento aluguel; igpm; igp-m; ipca; índice reajuste; indice reajuste; correção aluguel; correcao aluguel"
+                sinonimos: "aluguel; reajuste; reajuste de aluguel; reajuste aluguel; aumento aluguel; igpm; igp-m; ipca; índice reajuste; indice reajuste; correção aluguel; correcao aluguel",
+                ramal: "8333"
             },
             {
                 id: 19,
                 palavra: "Renovação",
                 departamento: "Renovação",
                 responsavel: "Setor de Renovação",
-                sinonimos: "renovação; renovacao; renovar contrato; renovação contratual; renovacao contratual; renovação de aluguel; renovacao de aluguel; prorrogação contrato; prorrogacao contrato; continuidade contrato"
+                sinonimos: "renovação; renovacao; renovar contrato; renovação contratual; renovacao contratual; renovação de aluguel; renovacao de aluguel; prorrogação contrato; prorrogacao contrato; continuidade contrato",
+                ramal: "8333"
             },
             {
                 id: 20,
                 palavra: "Alterar Data de Vencimento do Aluguel",
                 departamento: "Renovação",
                 responsavel: "Setor de Renovação",
-                sinonimos: "aluguel; vencimento; alterar data de vencimento; alterar data de vencimento aluguel; mudar vencimento aluguel; trocar vencimento aluguel; alterar vencimento contrato; data de pagamento aluguel; alterar dia de pagamento; mudar data de pagamento; alteração de vencimento; troca da data de vencimento; alterar dia do aluguel"
+                sinonimos: "aluguel; vencimento; alterar data de vencimento; alterar data de vencimento aluguel; mudar vencimento aluguel; trocar vencimento aluguel; alterar vencimento contrato; data de pagamento aluguel; alterar dia de pagamento; mudar data de pagamento; alteração de vencimento; troca da data de vencimento; alterar dia do aluguel",
+                ramal: "8333"
             },
             {
                 id: 21,
                 palavra: "Alterar Dados Bancários",
-                departamento: "Juridico",
+                departamento: "Jurídico",
                 responsavel: "Equipe de Trocas",
-                sinonimos: "alterar dados bancários; alterar dados bancarios; trocar conta bancária; trocar conta bancaria; mudar conta bancária; alterar conta para repasse; alterar pix; alterar banco; alterar agência; alterar agencia; alterar conta corrente; dados para repasse"
+                sinonimos: "alterar dados bancários; alterar dados bancarios; trocar conta bancária; trocar conta bancaria; mudar conta bancária; alterar conta para repasse; alterar pix; alterar banco; alterar agência; alterar agencia; alterar conta corrente; dados para repasse",
+                ramal: "8316 e 8339"
             },
             {
                 id: 22,
                 palavra: "Alteração de Beneficiário",
                 departamento: "Trocas",
                 responsavel: "Jurídico",
-                sinonimos: "alteração de beneficiário; alteracao de beneficiario; alterar beneficiário; alterar beneficiario; troca de beneficiário; troca de beneficiario; mudança de beneficiário; beneficiário do imóvel; beneficiario do imovel; alteração do favorecido; troca de proprietário; alteração de locador; novo beneficiário"
+                sinonimos: "alteração de beneficiário; alteracao de beneficiario; alterar beneficiário; alterar beneficiario; troca de beneficiário; troca de beneficiario; mudança de beneficiário; beneficiário do imóvel; beneficiario do imovel; alteração do favorecido; troca de proprietário; alteração de locador; novo beneficiário",
+                ramal: "8316 e 8339"
             },
             {
                 id: 23,
                 palavra: "Troca de Contrato",
                 departamento: "Trocas",
                 responsavel: "Jurídico",
-                sinonimos: "troca; troca de contrato; alteração contratual; alteracao contratual; mudança contratual; mudar contrato; alterar contrato; transferência de contrato; transferencia de contrato; troca de locador; troca de locatário; troca de locatario; troca de fiador; troca de garantia; aditivo contratual"
+                sinonimos: "troca; troca de contrato; alteração contratual; alteracao contratual; mudança contratual; mudar contrato; alterar contrato; transferência de contrato; transferencia de contrato; troca de locador; troca de locatário; troca de locatario; troca de fiador; troca de garantia; aditivo contratual",
+                ramal: "8316 e 8339"
             },
             {
                 id: 24,
                 palavra: "Multa Contratual",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "multa; multa contratual; multa rescisória; multa rescisoria; cálculo de multa; calculo de multa; multa de saída; multa de saida; rescisão antecipada; rescisao antecipada; quebra de contrato; valor da multa; multa aluguel; multa por rescisão"
+                sinonimos: "multa; multa contratual; multa rescisória; multa rescisoria; cálculo de multa; calculo de multa; multa de saída; multa de saida; rescisão antecipada; rescisao antecipada; quebra de contrato; valor da multa; multa aluguel; multa por rescisão",
+                ramal: "8346"
             },
             {
                 id: 25,
                 palavra: "Entregar Imóvel",
                 departamento: "Retenção",
                 responsavel: "Francielly",
-                sinonimos: "entregar imóvel; entregar imovel; quero entregar o imóvel; quero entregar o imovel; devolver imóvel; devolver imovel; sair do imóvel; sair do imovel; desocupar imóvel; desocupar imovel; encerrar locação; encerrar locacao; encerrar aluguel; não quero mais o imóvel; nao quero mais o imovel; deixar o imóvel; deixar o imovel; entrega do imóvel; entrega de imóvel; solicitar desocupação; quero sair do imóvel"
+                sinonimos: "entregar imóvel; entregar imovel; quero entregar o imóvel; quero entregar o imovel; devolver imóvel; devolver imovel; sair do imóvel; sair do imovel; desocupar imóvel; desocupar imovel; encerrar locação; encerrar locacao; encerrar aluguel; não quero mais o imóvel; nao quero mais o imovel; deixar o imóvel; deixar o imovel; entrega do imóvel; entrega de imóvel; solicitar desocupação; quero sair do imóvel",
+                ramal: "8360"
             },
             {
                 id: 26,
                 palavra: "Agendar Vistoria de Saída",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "vistoria; agendar vistoria de saída; agendar vistoria de saida; agendar vistoria; marcar vistoria de saída; marcar vistoria de saida; solicitar vistoria de saída; vistoria final; agendamento de vistoria; marcar vistoria final; vistoria para entrega do imóvel; agendar entrega do imóvel; agendar laudo de saída; vistoria rescisão"
+                sinonimos: "vistoria; agendar vistoria de saída; agendar vistoria de saida; agendar vistoria; marcar vistoria de saída; marcar vistoria de saida; solicitar vistoria de saída; vistoria final; agendamento de vistoria; marcar vistoria final; vistoria para entrega do imóvel; agendar entrega do imóvel; agendar laudo de saída; vistoria rescisão",
+                ramal: "8360"
             },
             {
                 id: 27,
                 palavra: "Vistoria de Entrada",
                 departamento: "Contratos e Análise",
                 responsavel: "Alan Brito Ramos",
-                sinonimos: "vistoria; vistoria de entrada; laudo de entrada; entrada do imóvel; entrada do imovel; vistoria inicial; alan; chaves entrada"
+                sinonimos: "vistoria; vistoria de entrada; laudo de entrada; entrada do imóvel; entrada do imovel; vistoria inicial; alan; chaves entrada",
+                ramal: "8318 e 8356"
             },
             {
                 id: 28,
                 palavra: "Contestação de Vistoria de Entrada",
                 departamento: "Manutenção",
                 responsavel: "Setor de Manutenção",
-                sinonimos: "vistoria; contestação de vistoria; contestacao de vistoria; contestação vistoria; contestacao vistoria; contestação de vistoria de entrada; contestacao de vistoria de entrada; divergência de vistoria; divergencia de vistoria; problema na vistoria; erro na vistoria; revisão de vistoria; revisao de vistoria; correção de vistoria; correcao de vistoria; contestar vistoria; laudo incorreto; fotos da vistoria"
+                sinonimos: "vistoria; contestação de vistoria; contestacao de vistoria; contestação vistoria; contestacao vistoria; contestação de vistoria de entrada; contestacao de vistoria de entrada; divergência de vistoria; divergencia de vistoria; problema na vistoria; erro na vistoria; revisão de vistoria; revisao de vistoria; correção de vistoria; correcao de vistoria; contestar vistoria; laudo incorreto; fotos da vistoria",
+                ramal: "8346"
             },
             {
                 id: 29,
                 palavra: "Vistoria de Saída",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "vistoria; vistoria de saída; vistoria de saida; laudo de saída; laudo de saida; saída do imóvel; saida do imovel; entrega de imóvel; entrega de imovel; entrega de chaves"
+                sinonimos: "vistoria; vistoria de saída; vistoria de saida; laudo de saída; laudo de saida; saída do imóvel; saida do imovel; entrega de imóvel; entrega de imovel; entrega de chaves",
+                ramal: "8346"
             },
             {
                 id: 30,
                 palavra: "Contestação de Vistoria de Saída",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "vistoria; contestação de vistoria de saída; contestacao de vistoria de saida; contestação vistoria saída; contestacao vistoria saida; contestação laudo de saída; divergência vistoria de saída; divergencia vistoria de saida; revisão vistoria de saída; revisao vistoria de saida; contestar vistoria de saída; problema vistoria de saída; discordância vistoria de saída; laudo de saída incorreto; contestação rescisão"
+                sinonimos: "vistoria; contestação de vistoria de saída; contestacao de vistoria de saida; contestação vistoria saída; contestacao vistoria saida; contestação laudo de saída; divergência vistoria de saída; divergencia vistoria de saida; revisão vistoria de saída; revisao vistoria de saida; contestar vistoria de saída; problema vistoria de saída; discordância vistoria de saída; laudo de saída incorreto; contestação rescisão",
+                ramal: "8346"
             },
             {
                 id: 31,
                 palavra: "Retirar Administração",
                 departamento: "Jurídico",
                 responsavel: "Carol",
-                sinonimos: "retirar administração; pedir o imóvel; retirar administracao; retirada de administração; retirada de administracao; encerrar administração; cancelar administração; encerramento da administração; retirar imóvel da administração; tirar imóvel da lago; distrato de administração; contrato de administração"
+                sinonimos: "retirar administração; pedir o imóvel; retirar administracao; retirada de administração; retirada de administracao; encerrar administração; cancelar administração; encerramento da administração; retirar imóvel da administração; tirar imóvel da lago; distrato de administração; contrato de administração",
+                ramal: "8316"
             },
             {
                 id: 32,
                 palavra: "Notificação",
                 departamento: "Jurídico",
                 responsavel: "Setor Jurídico",
-                sinonimos: "notificação; notificacao; notificações; notificacoes; notificação extrajudicial; notificar cliente; notificar locatário; notificar locatario; notificar locador; pedido de imóvel; comunicação formal; carta de notificação; notificação jurídica"
+                sinonimos: "notificação; notificacao; notificações; notificacoes; notificação extrajudicial; notificar cliente; notificar locatário; notificar locatario; notificar locador; pedido de imóvel; comunicação formal; carta de notificação; notificação jurídica",
+                ramal: "8316 e 8339"
             },
             {
                 id: 33,
                 palavra: "Notificações",
                 departamento: "Jurídico",
                 responsavel: "Setor Jurídico",
-                sinonimos: "notificação; notificacao; notificações; notificacoes; notificação extrajudicial; notificar cliente; notificar locatário; notificar locatario; notificar locador; pedido de imóvel; comunicação formal; carta de notificação; notificação jurídica"
+                sinonimos: "notificação; notificacao; notificações; notificacoes; notificação extrajudicial; notificar cliente; notificar locatário; notificar locatario; notificar locador; pedido de imóvel; comunicação formal; carta de notificação; notificação jurídica",
+                ramal: "8316 e 8339"
             },
             {
                 id: 34,
                 palavra: "Reclame Aqui",
                 departamento: "Jurídico",
                 responsavel: "Heliane",
-                sinonimos: "reclame aqui; reclamação; reclamacao; reclamação pública; procon; consumidor; resposta formal; ouvidoria"
+                sinonimos: "reclame aqui; reclamação; reclamacao; reclamação pública; procon; consumidor; resposta formal; ouvidoria",
+                ramal: "8362"
             },
             {
                 id: 35,
                 palavra: "Procon",
                 departamento: "Jurídico",
                 responsavel: "Heliane",
-                sinonimos: "procon; reclame aqui; consumidor; reclamação; reclamacao; defesa do consumidor; notificação procon"
+                sinonimos: "procon; reclame aqui; consumidor; reclamação; reclamacao; defesa do consumidor; notificação procon",
+                ramal: "8362"
             },
             {
                 id: 36,
                 palavra: "CPFL",
                 departamento: "Débitos",
                 responsavel: "Samuel e Maurício",
-                sinonimos: "cpfl; energia; luz; transferência de titularidade; transferencia de titularidade; titularidade cpfl; unidade consumidora; UC; religação energia; religacao energia"
+                sinonimos: "cpfl; energia; luz; transferência de titularidade; transferencia de titularidade; titularidade cpfl; unidade consumidora; UC; religação energia; religacao energia",
+                ramal: "8347 e 8368"
             },
             {
                 id: 37,
                 palavra: "SAERP",
                 departamento: "Débitos",
                 responsavel: "Samuel e Maurício",
-                sinonimos: "saerp; água; agua; esgoto; transferência de titularidade água; transferencia de titularidade agua; rgl; conta de água; conta de agua; religação água; religacao agua"
+                sinonimos: "saerp; água; agua; esgoto; transferência de titularidade água; transferencia de titularidade agua; rgl; conta de água; conta de agua; religação água; religacao agua",
+                ramal: "8347 e 8368"
             },
             {
                 id: 38,
                 palavra: "Rescisão",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "rescisão; rescisao; encerramento de contrato; desocupação; desocupacao; aviso de desocupação; aviso de desocupacao"
+                sinonimos: "rescisão; rescisao; encerramento de contrato; desocupação; desocupacao; aviso de desocupação; aviso de desocupacao",
+                ramal: "8346"
             },
             {
                 id: 39,
                 palavra: "Aviso de Desocupação",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "aviso de desocupação; aviso de desocupacao; aviso prévio; aviso previo; 30 dias; saída do imóvel; saida do imovel; entrega de imóvel; entrega de imovel"
+                sinonimos: "aviso de desocupação; aviso de desocupacao; aviso prévio; aviso previo; 30 dias; saída do imóvel; saida do imovel; entrega de imóvel; entrega de imovel",
+                ramal: "8346"
             },
             {
                 id: 40,
                 palavra: "Checagem de Reparos",
                 departamento: "Rescisão",
                 responsavel: "Setor de Rescisão",
-                sinonimos: "checagem de reparos; reparos rescisão; reparos rescisao; checagem; reparação de danos; reparacao de danos; vistoria reprovada"
+                sinonimos: "checagem de reparos; reparos rescisão; reparos rescisao; checagem; reparação de danos; reparacao de danos; vistoria reprovada",
+                ramal: "8346"
             },
             {
                 id: 41,
                 palavra: "Cadastrar Imóvel",
                 departamento: "Captação",
                 responsavel: "Setor de Captação",
-                sinonimos: "imóvel; imovel; cadastrar imóvel; cadastrar imovel; cadastro de imóvel; cadastro de imovel; incluir imóvel; incluir imovel; novo imóvel; novo imovel; captar imóvel; captar imovel; captação de imóvel; colocar imóvel na carteira; entrar imóvel; imóvel novo; cadastro proprietário; cadastro de locador; colocar imóvel para locação; disponibilizar imóvel"
+                sinonimos: "imóvel; imovel; cadastrar imóvel; cadastrar imovel; cadastro de imóvel; cadastro de imovel; incluir imóvel; incluir imovel; novo imóvel; novo imovel; captar imóvel; captar imovel; captação de imóvel; colocar imóvel na carteira; entrar imóvel; imóvel novo; cadastro proprietário; cadastro de locador; colocar imóvel para locação; disponibilizar imóvel",
+                ramal: "8319"
             },
             {
                 id: 42,
                 palavra: "Reajustar Valor de Imóvel Cadastrado",
                 departamento: "Captação",
                 responsavel: "Setor de Captação",
-                sinonimos: "imóvel; imovel; valor do imóvel; valor do imovel; reajustar valor de imóvel cadastrado; reajustar valor do imóvel; alterar valor do imóvel; atualizar valor do imóvel; mudar valor do imóvel; corrigir valor do imóvel; valor de locação; alterar aluguel anunciado; atualizar aluguel do imóvel; reajuste de valor do imóvel cadastrado; alterar preço do imóvel; atualizar preço do imóvel; mudança de valor de locação"
+                sinonimos: "imóvel; imovel; valor do imóvel; valor do imovel; reajustar valor de imóvel cadastrado; reajustar valor do imóvel; alterar valor do imóvel; atualizar valor do imóvel; mudar valor do imóvel; corrigir valor do imóvel; valor de locação; alterar aluguel anunciado; atualizar aluguel do imóvel; reajuste de valor do imóvel cadastrado; alterar preço do imóvel; atualizar preço do imóvel; mudança de valor de locação",
+                ramal: "8319"
             },
             {
                 id: 43,
                 palavra: "Retirar Imóvel do Sistema",
                 departamento: "Captação",
                 responsavel: "Setor de Captação",
-                sinonimos: "imóvel; imovel; tirar imóvel do sistema; tirar imovel do sistema; remover imóvel; remover imovel; excluir imóvel; excluir imovel; retirar imóvel da carteira; inativar imóvel; desativar imóvel; baixar imóvel; tirar anúncio do imóvel; retirar imóvel da locação; encerrar divulgação do imóvel; imóvel não disponível; retirar imóvel cadastrado"
+                sinonimos: "imóvel; imovel; tirar imóvel do sistema; tirar imovel do sistema; remover imóvel; remover imovel; excluir imóvel; excluir imovel; retirar imóvel da carteira; inativar imóvel; desativar imóvel; baixar imóvel; tirar anúncio do imóvel; retirar imóvel da locação; encerrar divulgação do imóvel; imóvel não disponível; retirar imóvel cadastrado",
+                ramal: "8319"
             },
             {
                 id: 44,
                 palavra: "Taxa de administração",
                 departamento: "Contratos e Análise",
                 responsavel: "Equipe Contratos",
-                sinonimos: "Taxa de administração, taxa administrativa, tarifa administrativa, custo administrativo, encargo administrativo, cobrança administrativa, despesas administrativas, honorários administrativos, taxa de gestão, taxa de gerenciamento, administração contratual, custo de administração, tarifa de gestão, taxa de serviço, cobrança de serviço, valor administrativo, encargo de gestão, taxa imobiliária, comissão administrativa, taxa operacional, contrato de aluguel, contratos, setor de contratos, equipe de contratos, departamento de contratos, análise contratual, análise de contrato, suporte contratual, atendimento contratual, gestão de contratos, administração de contratos, dúvidas contratuais, informações contratuais, esclarecimentos contratuais, locação, aluguel, imobiliária, administração imobiliária, gestão imobiliária, cobrança de aluguel, financeiro de locação, faturamento de aluguel, taxas da locação, encargos da locação, custos da locação."
+                sinonimos: "Taxa de administração, taxa administrativa, tarifa administrativa, custo administrativo, encargo administrativo, cobrança administrativa, despesas administrativas, honorários administrativos, taxa de gestão, taxa de gerenciamento, administração contratual, custo de administração, tarifa de gestão, taxa de serviço, cobrança de serviço, valor administrativo, encargo de gestão, taxa imobiliária, comissão administrativa, taxa operacional, contrato de aluguel, contratos, setor de contratos, equipe de contratos, departamento de contratos, análise contratual, análise de contrato, suporte contratual, atendimento contratual, gestão de contratos, administração de contratos, dúvidas contratuais, informações contratuais, esclarecimentos contratuais, locação, aluguel, imobiliária, administração imobiliária, gestão imobiliária, cobrança de aluguel, financeiro de locação, faturamento de aluguel, taxas da locação, encargos da locação, custos da locação.",
+                ramal: "8318 e 8356"
             },
             {
                 id: 45,
                 palavra: "Taxa de renovação",
                 departamento: "Renovação",
                 responsavel: "Equipe renovação",
-                sinonimos: "Taxa de renovação, tarifa de renovação, cobrança de renovação, encargo de renovação, custo de renovação, valor de renovação, taxa renovatória, taxa de prorrogação contratual, taxa de extensão contratual, taxa de continuidade contratual, renovação de contrato, renovação contratual, prorrogação de contrato, extensão de contrato, continuidade da locação, renovação de locação, renovação de aluguel, renovação imobiliária, renovação do contrato de aluguel, renovação da locação, renovação de vínculo contratual, atualização contratual, manutenção contratual, regularização contratual, ajuste contratual, revisão contratual, termo aditivo, aditivo contratual, renovação automática, renovação manual, vencimento contratual, contrato a vencer, contrato vencido, novo período contratual, período renovado, recontratação, continuidade do contrato, permanência contratual, equipe de renovação, setor de renovação, departamento de renovação, atendimento de renovação, suporte de renovação, gestão de renovação, análise de renovação"
+                sinonimos: "Taxa de renovação, tarifa de renovação, cobrança de renovação, encargo de renovação, custo de renovação, valor de renovação, taxa renovatória, taxa de prorrogação contratual, taxa de extensão contratual, taxa de continuidade contratual, renovação de contrato, renovação contratual, prorrogação de contrato, extensão de contrato, continuidade da locação, renovação de locação, renovação de aluguel, renovação imobiliária, renovação do contrato de aluguel, renovação da locação, renovação de vínculo contratual, atualização contratual, manutenção contratual, regularização contratual, ajuste contratual, revisão contratual, termo aditivo, aditivo contratual, renovação automática, renovação manual, vencimento contratual, contrato a vencer, contrato vencido, novo período contratual, período renovado, recontratação, continuidade do contrato, permanência contratual, equipe de renovação, setor de renovação, departamento de renovação, atendimento de renovação, suporte de renovação, gestão de renovação, análise de renovação",
+                ramal: "8333"
             },
             {
                 id: 46,
                 palavra: "Taxa de contrato",
                 departamento: "Contratos e Análise",
                 responsavel: "Equipe Contratos",
-                sinonimos: "Taxa de contrato, tarifa de contrato, cobrança de contrato, encargo contratual, custo contratual, valor do contrato, taxa contratual, taxa de formalização contratual, taxa de elaboração de contrato, taxa de emissão de contrato, taxa de confecção de contrato, taxa de assinatura de contrato, taxa de abertura de contrato, taxa de cadastro contratual, taxa de análise contratual, taxa de processamento contratual, taxa de documentação contratual, custo de formalização, custo de elaboração contratual, custo de emissão contratual, cobrança contratual, despesas contratuais, honorários contratuais, formalização de contrato, elaboração de contrato, emissão de contrato, confecção de contrato, assinatura de contrato, cadastro de contrato, abertura de contrato, análise de contrato, análise contratual, documentação contratual, documentação de locação, contrato de locação, contrato de aluguel, contrato imobiliário, contrato residencial, contrato comercial, contrato novo, novo contrato, celebração de contrato, criação de contrato, geração de contrato, processamento de contrato, gestão de contratos, administração de contratos, suporte contratual, atendimento contratual, dúvidas contratuais, informações contratuais, esclarecimentos contratuais, equipe de contratos, setor de contratos, departamento de contratos, contratos e análise, departamento de contratos e análise, locação, aluguel, imobiliária, administração imobiliária, gestão imobiliária, documentação da locação, documentação do aluguel, custos da contratação, encargos contratuais, despesas de contratação, taxa de contratação, custo de contratação, cobrança de contratação, taxa de intermediação contratual, taxa de serviços contratuais, regularização contratual, validação contratual, conferência contratual, aprovação contratual."
+                sinonimos: "Taxa de contrato, tarifa de contrato, cobrança de contrato, encargo contratual, custo contratual, valor do contrato, taxa contratual, taxa de formalização contratual, taxa de elaboração de contrato, taxa de emissão de contrato, taxa de confecção de contrato, taxa de assinatura de contrato, taxa de abertura de contrato, taxa de cadastro contratual, taxa de análise contratual, taxa de processamento contratual, taxa de documentação contratual, custo de formalização, custo de elaboração contratual, custo de emissão contratual, cobrança contratual, despesas contratuais, honorários contratuais, formalização de contrato, elaboração de contrato, emissão de contrato, confecção de contrato, assinatura de contrato, cadastro de contrato, abertura de contrato, análise de contrato, análise contratual, documentação contratual, documentação de locação, contrato de locação, contrato de aluguel, contrato imobiliário, contrato residencial, contrato comercial, contrato novo, novo contrato, celebração de contrato, criação de contrato, geração de contrato, processamento de contrato, gestão de contratos, administração de contratos, suporte contratual, atendimento contratual, dúvidas contratuais, informações contratuais, esclarecimentos contratuais, equipe de contratos, setor de contratos, departamento de contratos, contratos e análise, departamento de contratos e análise, locação, aluguel, imobiliária, administração imobiliária, gestão imobiliária, documentação da locação, documentação do aluguel, custos da contratação, encargos contratuais, despesas de contratação, taxa de contratação, custo de contratação, cobrança de contratação, taxa de intermediação contratual, taxa de serviços contratuais, regularização contratual, validação contratual, conferência contratual, aprovação contratual.",
+                ramal: "8318 e 8356"
             },
             {
                 id: 47,
                 palavra: "Exoneração de fiança",
                 departamento: "Jurídico",
                 responsavel: "Sophia",
-                sinonimos: "Exoneração de fiança, exoneração de fiador, liberação de fiador, retirada de fiador, desligamento de fiador, substituição de fiador, troca de fiador, exclusão de fiador, cancelamento de fiança, baixa de fiança, encerramento de fiança, extinção da fiança, dispensa de fiador, remoção de fiador, alteração de garantia, substituição de garantia, troca de garantia locatícia, mudança de garantia, liberação de garantia, cancelamento de garantia, retirada de garantia, exclusão de garantia, atualização de garantia, regularização de garantia, revisão de garantia, garantia locatícia, garantia de aluguel, garantia contratual, fiador do contrato, fiador da locação, fiador do aluguel, desvinculação de fiador, desobrigação de fiador, saída de fiador, pedido de exoneração, solicitação de exoneração, processo de exoneração, termo de exoneração, exoneração contratual, liberação contratual do fiador, retirada de responsabilidade do fiador, encerramento da responsabilidade do fiador, substituição de responsável financeiro, alteração de responsável pela garantia, mudança de responsável pelo contrato, transferência de garantia, troca de responsável pela locação, desvinculação da garantia, retirada da garantia fidejussória, garantia fidejussória, fiador, locação, aluguel, contrato de locação, contrato de aluguel, imobiliária, administração imobiliária, jurídico de locação, análise de garantia, documentação de garantia."
+                sinonimos: "Exoneração de fiança, exoneração de fiador, liberação de fiador, retirada de fiador, desligamento de fiador, substituição de fiador, troca de fiador, exclusão de fiador, cancelamento de fiança, baixa de fiança, encerramento de fiança, extinção da fiança, dispensa de fiador, remoção de fiador, alteração de garantia, substituição de garantia, troca de garantia locatícia, mudança de garantia, liberação de garantia, cancelamento de garantia, retirada de garantia, exclusão de garantia, atualização de garantia, regularização de garantia, revisão de garantia, garantia locatícia, garantia de aluguel, garantia contratual, fiador do contrato, fiador da locação, fiador do aluguel, desvinculação de fiador, desobrigação de fiador, saída de fiador, pedido de exoneração, solicitação de exoneração, processo de exoneração, termo de exoneração, exoneração contratual, liberação contratual do fiador, retirada de responsabilidade do fiador, encerramento da responsabilidade do fiador, substituição de responsável financeiro, alteração de responsável pela garantia, mudança de responsável pelo contrato, transferência de garantia, troca de responsável pela locação, desvinculação da garantia, retirada da garantia fidejussória, garantia fidejussória, fiador, locação, aluguel, contrato de locação, contrato de aluguel, imobiliária, administração imobiliária, jurídico de locação, análise de garantia, documentação de garantia.",
+                ramal: "8339"
             },
             {
                 id: 48,
                 palavra: "Alteração dados cadastrais",
                 departamento: "Débitos",
                 responsavel: "Equipe débitos",
-                sinonimos: "Alteração de dados cadastrais, atualização cadastral, atualização de cadastro, alteração cadastral, revisão cadastral, correção cadastral, modificação cadastral, ajuste cadastral, atualização de dados, alteração de dados, correção de dados, atualização de informações, alteração de informações, revisão de informações, cadastro, dados cadastrais, informações cadastrais, ficha cadastral, registro cadastral, atualização de e-mail, alteração de e-mail, troca de e-mail, mudança de e-mail, correção de e-mail, atualização de endereço eletrônico, alteração de endereço eletrônico, atualização de telefone, alteração de telefone, troca de telefone, mudança de telefone, atualização de celular, alteração de celular, troca de celular, atualização de contato, alteração de contato, atualização de endereço, alteração de endereço, mudança de endereço, troca de endereço, correção de endereço, atualização de residência, alteração de residência, atualização de domicílio, atualização de locador, alteração de locador, inclusão de locador, exclusão de locador, mudança de locador, atualização de proprietário, alteração de proprietário, atualização de locatário, alteração de locatário, inclusão de locatário, exclusão de locatário, mudança de locatário, atualização de inquilino, alteração de inquilino, troca de inquilino, atualização de dados do locador, atualização de dados do locatário, atualização de dados do proprietário, atualização de dados do inquilino, regularização cadastral, validação cadastral, conferência cadastral, solicitação de atualização cadastral, solicitação de alteração cadastral, atualização de cadastro imobiliário, alteração de cadastro imobiliário, documentação cadastral, atualização de documentos, alteração de documentos, correção de cadastro, manutenção cadastral, gestão cadastral, atendimento cadastral."
+                sinonimos: "Alteração de dados cadastrais, atualização cadastral, atualização de cadastro, alteração cadastral, revisão cadastral, correção cadastral, modificação cadastral, ajuste cadastral, atualização de dados, alteração de dados, correção de dados, atualização de informações, alteração de informações, revisão de informações, cadastro, dados cadastrais, informações cadastrais, ficha cadastral, registro cadastral, atualização de e-mail, alteração de e-mail, troca de e-mail, mudança de e-mail, correção de e-mail, atualização de endereço eletrônico, alteração de endereço eletrônico, atualização de telefone, alteração de telefone, troca de telefone, mudança de telefone, atualização de celular, alteração de celular, troca de celular, atualização de contato, alteração de contato, atualização de endereço, alteração de endereço, mudança de endereço, troca de endereço, correção de endereço, atualização de residência, alteração de residência, atualização de domicílio, atualização de locador, alteração de locador, inclusão de locador, exclusão de locador, mudança de locador, atualização de proprietário, alteração de proprietário, atualização de locatário, alteração de locatário, inclusão de locatário, exclusão de locatário, mudança de locatário, atualização de inquilino, alteração de inquilino, troca de inquilino, atualização de dados do locador, atualização de dados do locatário, atualização de dados do proprietário, atualização de dados do inquilino, regularização cadastral, validação cadastral, conferência cadastral, solicitação de atualização cadastral, solicitação de alteração cadastral, atualização de cadastro imobiliário, alteração de cadastro imobiliário, documentação cadastral, atualização de documentos, alteração de documentos, correção de cadastro, manutenção cadastral, gestão cadastral, atendimento cadastral.",
+                ramal: "8335 e 8336"
             },
             {
                 id: 49,
                 palavra: "Tarifa bancária locador",
                 departamento: "Financeiro",
                 responsavel: "Equipe Financeiro",
-                sinonimos: "Tarifa bancária locador, tarifa bancária do locador, taxa bancária locador, taxa bancária do locador, encargo bancário locador, encargo bancário do locador, cobrança bancária locador, cobrança bancária do locador, despesa bancária locador, despesa bancária do locador, custo bancário locador, custo bancário do locador, tarifa financeira locador, tarifa financeira do locador, taxa financeira locador, taxa financeira do locador, encargo financeiro locador, encargo financeiro do locador"
+                sinonimos: "Tarifa bancária locador, tarifa bancária do locador, taxa bancária locador, taxa bancária do locador, encargo bancário locador, encargo bancário do locador, cobrança bancária locador, cobrança bancária do locador, despesa bancária locador, despesa bancária do locador, custo bancário locador, custo bancário do locador, tarifa financeira locador, tarifa financeira do locador, taxa financeira locador, taxa financeira do locador, encargo financeiro locador, encargo financeiro do locador",
+                ramal: ""
             },
             {
                 id: 50,
                 palavra: "Tarifa bancária locatários",
                 departamento: "Débitos",
                 responsavel: "Equipe débitos",
-                sinonimos: "Tarifa bancária locatários, tarifa bancária do locatário, tarifa bancária dos locatários, taxa bancária locatário, taxa bancária locatários, encargo bancário locatário, encargo bancário locatários, cobrança bancária locatário, cobrança bancária locatários, despesa bancária locatário, despesa bancária locatários, custo bancário locatário, custo"
+                sinonimos: "Tarifa bancária locatários, tarifa bancária do locatário, tarifa bancária dos locatários, taxa bancária locatário, taxa bancária locatários, encargo bancário locatário, encargo bancário locatários, cobrança bancária locatário, cobrança bancária locatários, despesa bancária locatário, despesa bancária locatários, custo bancário locatário, custo",
+                ramal: "8335 e 8336"
             },
             {
                 id: 51,
                 palavra: "Assinatura digital",
                 departamento: "Contratos",
                 responsavel: "Equipe contratos",
-                sinonimos: "Assinatura digital, assinatura eletrônica, assinatura online, assinatura virtual, assinatura de contrato, assinatura eletrônica de contrato, assinatura digital de contrato, assinatura online de contrato, assinatura virtual de contrato, assinatura por certificado digital, certificado digital, assinatura com certificado digital, assinatura remota, assinatura à distância, assinatura de documento, assinatura eletrônica de documento, assinatura digital de documento, formalização digital, formalização eletrônica, formalização online, validação digital, validação eletrônica, autenticação digital, autenticação eletrônica, assinatura DocuSign, assinatura Clicksign, assinatura de locação, assinatura de contrato de locação, assinatura do contrato, assinatura do aluguel, envio para assinatura, documento para assinatura, pendência de assinatura, coleta de assinatura, processo de assinatura, conclusão de assinatura, confirmação de assinatura, aceite digital, aceite eletrônico, aceite de contrato, aceite online, aceite digital de contrato, assinatura de proprietário, assinatura de locador, assinatura de locatário, assinatura de testemunha, assinatura contratual, assinatura eletrônica contratual, assinatura digital contratual, contrato digital, contrato eletrônico, documento eletrônico, documento digital"
+                sinonimos: "Assinatura digital, assinatura eletrônica, assinatura online, assinatura virtual, assinatura de contrato, assinatura eletrônica de contrato, assinatura digital de contrato, assinatura online de contrato, assinatura virtual de contrato, assinatura por certificado digital, certificado digital, assinatura com certificado digital, assinatura remota, assinatura à distância, assinatura de documento, assinatura eletrônica de documento, assinatura digital de documento, formalização digital, formalização eletrônica, formalização online, validação digital, validação eletrônica, autenticação digital, autenticação eletrônica, assinatura DocuSign, assinatura Clicksign, assinatura de locação, assinatura de contrato de locação, assinatura do contrato, assinatura do aluguel, envio para assinatura, documento para assinatura, pendência de assinatura, coleta de assinatura, processo de assinatura, conclusão de assinatura, confirmação de assinatura, aceite digital, aceite eletrônico, aceite de contrato, aceite online, aceite digital de contrato, assinatura de proprietário, assinatura de locador, assinatura de locatário, assinatura de testemunha, assinatura contratual, assinatura eletrônica contratual, assinatura digital contratual, contrato digital, contrato eletrônico, documento eletrônico, documento digital",
+                ramal: "8318 e 8356"
             },
             {
                 id: 52,
                 palavra: "Certidão de imóveis",
                 departamento: "Contratos",
                 responsavel: "Equipe contratos",
-                sinonimos: "Certidão de imóveis, certidão de imóvel, certidão imobiliária, certidão do imóvel, certidão da matrícula, matrícula do imóvel, matrícula atualizada, matrícula atualizada do imóvel, matrícula imobiliária, matrícula do registro de imóveis, certidão de matrícula, certidão de matrícula atualizada, certidão de inteiro teor, inteiro teor da matrícula, certidão de inteiro teor da matrícula, certidão registral, certidão do registro de imóveis, certidão de propriedade, certidão de titularidade, comprovação de propriedade, documento de propriedade do imóvel, registro do imóvel, registro imobiliário, registro de imóveis, documento do imóvel, documentação do imóvel, documentação imobiliária, situação registral do imóvel, consulta de matrícula, consulta imobiliária, levantamento de matrícula, atualização de matrícula, emissão de certidão, solicitação de certidão, obtenção de certidão, certidão atualizada, certidão negativa do imóvel, certidão positiva do imóvel, certidão para locação, documentação para contrato, documentos do proprietário, regularização documental do imóvel, averbação de imóvel, averbação na matrícula, histórico da matrícula, ficha do imóvel, cadastro imobiliário, documento registral, certidão cartorária, certidão do cartório de registro de imóveis"
+                sinonimos: "Certidão de imóveis, certidão de imóvel, certidão imobiliária, certidão do imóvel, certidão da matrícula, matrícula do imóvel, matrícula atualizada, matrícula atualizada do imóvel, matrícula imobiliária, matrícula do registro de imóveis, certidão de matrícula, certidão de matrícula atualizada, certidão de inteiro teor, inteiro teor da matrícula, certidão de inteiro teor da matrícula, certidão registral, certidão do registro de imóveis, certidão de propriedade, certidão de titularidade, comprovação de propriedade, documento de propriedade do imóvel, registro do imóvel, registro imobiliário, registro de imóveis, documento do imóvel, documentação do imóvel, documentação imobiliária, situação registral do imóvel, consulta de matrícula, consulta imobiliária, levantamento de matrícula, atualização de matrícula, emissão de certidão, solicitação de certidão, obtenção de certidão, certidão atualizada, certidão negativa do imóvel, certidão positiva do imóvel, certidão para locação, documentação para contrato, documentos do proprietário, regularização documental do imóvel, averbação de imóvel, averbação na matrícula, histórico da matrícula, ficha do imóvel, cadastro imobiliário, documento registral, certidão cartorária, certidão do cartório de registro de imóveis",
+                ramal: "8318 e 8356"
             },
             {
                 id: 53,
                 palavra: "13º taxa de administração",
                 departamento: "Débitos",
                 responsavel: "Equipe débitos",
-                sinonimos: "13ª taxa de administração, décima terceira taxa de administração, taxa administrativa do 13º, taxa administrativa décima terceira, cobrança da 13ª taxa de administração, cobrança do 13º da taxa de administração, parcela anual da taxa de administração, taxa de administração anual, encargo anual de administração, tarifa anual de administração, cobrança anual de administração, valor referente à 13ª taxa de administração, lançamento da 13ª taxa de administração, débito da 13ª taxa de administração, taxa adicional de administração, parcela extra da taxa de administração, taxa complementar de administração, cobrança complementar da taxa de administração, ajuste da taxa de administração anual, encargo complementar de administração, taxa administrativa anual, décima terceira cobrança administrativa, 13º administrativo, taxa de administração referente ao 13º, valor da 13ª taxa administrativa."
+                sinonimos: "13ª taxa de administração, décima terceira taxa de administração, taxa administrativa do 13º, taxa administrativa décima terceira, cobrança da 13ª taxa de administração, cobrança do 13º da taxa de administração, parcela anual da taxa de administração, taxa de administração anual, encargo anual de administração, tarifa anual de administração, cobrança anual de administração, valor referente à 13ª taxa de administração, lançamento da 13ª taxa de administração, débito da 13ª taxa de administração, taxa adicional de administração, parcela extra da taxa de administração, taxa complementar de administração, cobrança complementar da taxa de administração, ajuste da taxa de administração anual, encargo complementar de administração, taxa administrativa anual, décima terceira cobrança administrativa, 13º administrativo, taxa de administração referente ao 13º, valor da 13ª taxa administrativa.",
+                ramal: "8335 e 8336"
             },
             {
                 id: 54,
                 palavra: "Falecimento ou óbito",
                 departamento: "Jurídico",
                 responsavel: "Equipe jurídico",
-                sinonimos: "falecimento, óbito, morte, passamento, falecimento do locatário, falecimento do proprietário, óbito do locatário, óbito do proprietário, comunicação de falecimento, comunicação de óbito, registro de falecimento, registro de óbito, notificação de falecimento, notificação de óbito, informação de falecimento, informação de óbito, certidão de óbito, processo de óbito, processo de falecimento, sucessão por falecimento, sucessão por óbito, espólio, inventário, abertura de inventário, habilitação de herdeiros, sucessão hereditária, herança, regularização por falecimento, regularização de óbito, falecimento de titular, óbito de titular, falecimento de contratante, óbito de contratante, morte do titular, morte do contratante, falecimento do responsável, óbito do responsável."
+                sinonimos: "falecimento, óbito, morte, passamento, falecimento do locatário, falecimento do proprietário, óbito do locatário, óbito do proprietário, comunicação de falecimento, comunicação de óbito, registro de falecimento, registro de óbito, notificação de falecimento, notificação de óbito, informação de falecimento, informação de óbito, certidão de óbito, processo de óbito, processo de falecimento, sucessão por falecimento, sucessão por óbito, espólio, inventário, abertura de inventário, habilitação de herdeiros, sucessão hereditária, herança, regularização por falecimento, regularização de óbito, falecimento de titular, óbito de titular, falecimento de contratante, óbito de contratante, morte do titular, morte do contratante, falecimento do responsável, óbito do responsável.",
+                ramal: "8316 e 8339"
             },
             {
                 id: 55,
                 palavra: "Habite-se",
                 departamento: "Locação",
                 responsavel: "Mila",
-                sinonimos: "habite-se, habite se, habite, certificado de habite-se, certidão de habite-se, certificado de conclusão de obra, certidão de conclusão de obra, conclusão de obra, auto de conclusão, auto de conclusão de obra, alvará de habitação, alvará de ocupação, licença de habitação, licença de ocupação, certificado de ocupação, certidão de ocupação, autorização de ocupação, autorização para habitação, documento de conclusão de obra, regularização da obra, regularização do imóvel, habite-se do imóvel, certificado de habitação, certidão de habitação, emissão de habite-se, solicitação de habite-se, pedido de habite-se, requerimento de habite-se, aprovação do habite-se, obtenção do habite-se, liberação do habite-se"
+                sinonimos: "habite-se, habite se, habite, certificado de habite-se, certidão de habite-se, certificado de conclusão de obra, certidão de conclusão de obra, conclusão de obra, auto de conclusão, auto de conclusão de obra, alvará de habitação, alvará de ocupação, licença de habitação, licença de ocupação, certificado de ocupação, certidão de ocupação, autorização de ocupação, autorização para habitação, documento de conclusão de obra, regularização da obra, regularização do imóvel, habite-se do imóvel, certificado de habitação, certidão de habitação, emissão de habite-se, solicitação de habite-se, pedido de habite-se, requerimento de habite-se, aprovação do habite-se, obtenção do habite-se, liberação do habite-se",
+                ramal: "8372"
+            },
+            {
+                id: 56,
+                palavra: "Mudança",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "mudança, mudar, mudando, mudou, alteração, alterar, alterando, alteração de endereço, mudança de endereço, mudança de residência, mudança de residência do locatário, mudança de residência do proprietário, mudança de imóvel, troca, trocar, transferência, transferir, transferência de endereço, transferência de residência, transferência de imóvel, deslocamento, novo endereço, novo domicílio, novo local de residência, alteração de domicílio, alteração de residência, alteração cadastral, atualização de endereço, atualização cadastral, atualização de residência, endereço novo, endereço atualizado, mudança de local, mudança de localização, mudança de domicílio, mudança de moradia, mudança de casa, mudança de apartamento, mudança para outro imóvel, mudança para outro endereço, mudança de cidade, mudança de município, mudança de localidade, mudança de ocupante, troca de endereço, troca de residência, troca de imóvel, troca de domicílio, transferência para outro imóvel, transferência para outro endereço, transferência de moradia, transferência de residência, comunicação de mudança, comunicação de mudança de endereço, comunicação de novo endereço, aviso de mudança, aviso de mudança de endereço, aviso de novo endereço, solicitação de mudança, solicitação de alteração de endereço, pedido de mudança, pedido de alteração de endereço, pedido de transferência, requerimento de mudança, requerimento de alteração de endereço",
+                ramal: "8313"
+            },
+            {
+                id: 57,
+                palavra: "Internet",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "internet, conexão com a internet, conexão à internet, conexão, acesso à internet, acesso à rede, rede, rede de internet, rede mundial, rede mundial de computadores, serviço de internet, serviço de conexão, provedor de internet, operadora de internet, banda larga, conexão banda larga, internet banda larga, fibra, fibra óptica, internet fibra, conexão fibra óptica, Wi-Fi, wifi, wireless, rede Wi-Fi, conexão Wi-Fi, sinal de internet, sinal Wi-Fi, sinal de rede, dados, dados móveis, internet móvel, conexão móvel, rede móvel, internet residencial, internet empresarial, internet corporativa, internet comercial, link de internet, link, link de conexão, link dedicado, conexão dedicada, acesso à rede, acesso online, conectividade, serviço de conectividade",
+                ramal: "8313"
+            },
+            {
+                id: 58,
+                palavra: "Lago Tranquility",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "Lago Tranquility, Lago Tranquility condomínio, Lago Tranquility Residencial, Residencial Lago Tranquility, Condomínio Lago Tranquility, Tranquility, Tranquility Lago, Lago Tranquility Ribeirão Preto, Lago Tranquility condomínio residencial, Lago Tranquility imóvel, Lago Tranquility residência, Lago Tranquility endereço, Lago Tranquility localização, seguro, mensalidade, tranquilo",
+                ramal: "8313"
+            },
+            {
+                id: 59,
+                palavra: "Pintura",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "pintura, pintar, pintado, pintada, pintura do imóvel, pintura da casa, pintura do apartamento, pintura residencial, pintura interna, pintura externa, pintura interna do imóvel, pintura externa do imóvel, pintura de parede, pintura das paredes, pintura de teto, pintura de portas, pintura de janelas, pintura de fachada, pintura da fachada, pintura de imóvel, pintura predial, pintura residencial completa, pintura geral, pintura completa, pintura parcial, nova pintura, repintura, repintar, retoque, retoques de pintura, retoque de pintura, reparo de pintura, reparos na pintura, manutenção da pintura, manutenção de pintura, renovação da pintura, renovação de pintura, restauração da pintura, restauração de pintura, acabamento, acabamento de pintura, reforma da pintura, reforma de pintura, serviço de pintura, serviço de pintor, trabalho de pintura, pintura e acabamento, pintura e reparos, pintura do imóvel alugado, pintura do imóvel locado, pintura antes da entrega",
+                ramal: "8313"
+            },
+            {
+                id: 60,
+                palavra: "Jardinagem",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "jardinagem, jardineiro, jardinagem do imóvel, serviço de jardinagem, serviço de jardineiro, manutenção de jardim, manutenção do jardim, manutenção de área verde, manutenção de áreas verdes, cuidado do jardim, cuidados com o jardim, cuidados de jardinagem, conservação do jardim, conservação de área verde, conservação de áreas verdes, limpeza do jardim, limpeza de jardim, limpeza de área verde, poda, poda de árvores, poda de plantas, poda de arbustos, poda de jardim, corte de grama, corte da grama, cortar grama, aparar grama, aparação de grama, roçada, roçagem, capina, capinação, retirada de mato, remoção de mato, limpeza de mato, controle de mato, controle de ervas daninhas, retirada de ervas daninhas, plantio, plantação, replantio, cultivo, cultivo de plantas, cuidado de plantas, manutenção de plantas, irrigação, rega, regar plantas, adubação, adubo, fertilização, fertilização do jardim, paisagismo, manutenção paisagística, conservação paisagística, área externa, área verde, jardim, jardins, gramado, gramados, canteiro, canteiros, plantas, árvores, arbustos, flores, vegetação, vegetação do imóvel",
+                ramal: "8313"
+            },
+            {
+                id: 61,
+                palavra: "Serralheiro",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "serralheiro, serralheria, serviço de serralheiro, serviço de serralheria, serralheiro do imóvel, profissional de serralheria, profissional serralheiro, trabalho de serralheria, manutenção de serralheria, reparo de serralheria, conserto de serralheria, reparo de metal, conserto de metal, manutenção de estruturas metálicas, reparo de estruturas metálicas, fabricação de estruturas metálicas, instalação de estruturas metálicas, estrutura metálica, estruturas metálicas, metalúrgica, serviços metálicos, serviço de metal, trabalho com metal, soldador, soldagem, solda, serviço de solda, reparo de solda, portão, portões, manutenção de portão, conserto de portão, reparo de portão, ajuste de portão, instalação de portão, fabricação de portão, grade, grades, manutenção de grades, conserto de grades, reparo de grades, instalação de grades, fabricação de grades, corrimão, corrimãos, manutenção de corrimão, reparo de corrimão, instalação de corrimão, guarda-corpo, guarda corpos, manutenção de guarda-corpo, reparo de guarda-corpo, instalação de guarda-corpo, cerca, cercas, manutenção de cerca, reparo de cerca,",
+                ramal: "8313"
+            },
+            {
+                id: 62,
+                palavra: "Marcineiro",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "marceneiro, marcenaria, montador, serviço de marceneiro, serviço de marcenaria, profissional de marcenaria, profissional marceneiro, trabalho de marcenaria, manutenção de marcenaria, reparo de marcenaria, conserto de marcenaria, reforma de móveis, restauração de móveis, reparo de móveis, conserto de móveis, manutenção de móveis, fabricação de móveis, montagem de móveis, instalação de móveis, móveis planejados, móveis sob medida, fabricação de móveis planejados, instalação de móveis planejados, montagem de móveis planejados, armário, armários, armário planejado, armários planejados, guarda-roupa, guarda-roupas, cozinha planejada, móveis de cozinha, gabinete, gabinetes, bancada, bancadas, prateleira, prateleiras, estante, estantes, painel, painéis, rack, racks, mesa, mesas, cadeira, cadeiras, cômoda, cômodas, criado-mudo, criados-mudos, porta de madeira, portas de madeira, janela de madeira, janelas de madeira, madeira, trabalho em madeira, acabamento em madeira, reparo em madeira, conserto em madeira, manutenção em madeira, restauração de madeira, polimento de madeira, envernização, envernizamento, verniz, aplicação de verniz, pintura de madeira, lixamento, corte de madeira, ajuste de móveis, regulagem de móveis, montagem de armário, instalação de armário, reparo de armário, conserto de armário, manutenção de armário",
+                ramal: "8313"
+            },
+            {
+                id: 63,
+                palavra: "Piscineiro",
+                departamento: "Lago Serviços",
+                responsavel: "Felipe Rocha",
+                sinonimos: "piscineiro, piscina, serviço de piscina, serviço de piscineiro, manutenção de piscina, manutenção da piscina, limpeza de piscina, limpeza da piscina, limpeza de piscinas, tratamento de piscina, tratamento da piscina, conservação de piscina, conservação da piscina, cuidados com a piscina, cuidados da piscina, limpeza e manutenção de piscina, manutenção e limpeza de piscina, higienização de piscina, higienização da piscina, aspiração de piscina, aspiração da piscina, limpeza do fundo da piscina, limpeza das bordas da piscina, limpeza de azulejos da piscina, limpeza de revestimento da piscina, escovação da piscina, escovação de piscina, filtragem da piscina, filtração da piscina, filtro da piscina, manutenção do filtro da piscina, limpeza do filtro da piscina, troca do filtro da piscina, bomba da piscina, manutenção da bomba da piscina, reparo da bomba da piscina, conserto da bomba da piscina, tratamento químico da piscina, tratamento da água da piscina, limpeza da água da piscina, controle da água da piscina, controle de cloro, aplicação de cloro, cloração, cloro da piscina, controle de pH, regulagem de pH, correção de pH, alcalinidade da piscina, controle de alcalinidade, aplicação de produtos químicos, produtos para piscina, produtos químicos para piscina, manutenção de equipamentos de piscina, reparo de equipamentos de piscina, conserto de equipamentos de piscina, aquecimento de piscina, manutenção do aquecedor da piscina, reparo do aquecedor da piscina, limpeza do entorno da piscina, limpeza da área da piscina, manutenção da área da piscina",
+                ramal: "8313"
             }
 
         ];
@@ -1240,9 +1377,12 @@
                     <td>${highlightText(record.departamento, query)}</td>
                     <td>${highlightText(record.responsavel, query)}</td>
                     <td>
-                        <button class="btn-view-details" onclick="showDetails(${record.id})">
-                            Ver Detalhes
-                        </button>
+                        <div class="actions-cell">
+                            <button class="btn-view-details" onclick="showDetails(${record.id})">
+                                Ver Detalhes
+                            </button>
+                            <span class="badge-ramal">${record.ramal ? `Ramal: ${record.ramal}` : 'Sem ramal'}</span>
+                        </div>
                     </td>
                 `;
                 resultsTableBody.appendChild(row);
